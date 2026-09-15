@@ -1,2 +1,20 @@
-# eyodd_2026b
+
+
+# 🤖🫆Estructura y Organización de Datos
 Repositorio de la matería de Estructura y Organización de Datos Semestre 2026B
+
+
+## Competencias a desarrollar
+Identifica, selecciona y aplica eficientemente tipos de datos abstractos, métodos de ordenamiento t búsqueda para la optimización del rendimiento de soluciones de problemas del mando real.
+
+
+## Contenido
+**Unidad 1** Fundamentos de estructura de datos
+
+**Unidad 2** Estructuras lineales
+
+**Unidad 3** Estructuras  no lineales
+
+**Unidad 4** Métodos de ordenamiento y búsqueda
+
+Cambio en codespace
