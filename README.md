@@ -1,4 +1,4 @@
-
+<img src="image.png" alt="baner" width="100%">
 
 # 🤖🫆Estructura y Organización de Datos
 Repositorio de la matería de Estructura y Organización de Datos Semestre 2026B
