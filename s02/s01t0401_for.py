@@ -13,7 +13,7 @@ timestamp_01 = time.time()
 
 #Programa que califica las suma
 # de los "n" numeros naturales
-n = 100
+n = 3000
 total_sum = 0
 
 #Ciclo for 
