@@ -5,30 +5,52 @@ Por ejemplo, si n = 100, el programa
 calculara la suma del 1 al 100
 42
 """
-# Importar la biblioteca de timepo
+
+# Importar biblioteca time
 import time
 
-## Crear las variables para
-## el problema
-n = 100
-the_sum = 0
 
-# Tomando el t1
-timestap_01 = time.time()
+# FUNCION QUE SUMA LOS
+# N NUMEROS NATURALES
+def sum_of_n(n):
+    total_sum = 0
 
-# Iniciando la suma
-# 100
-while(n > 0):
-    the_sum = the_sum + n # 100 + 99 + 98 + ... + 1
-    n = n - 1
+    # Sumando los "n" numeros
+    while n > 0:
+        total_sum = total_sum + n
+        n = n - 1
 
-#Tomamos el tiempo 2
-timestap_02 = time.time()
+    # Retornando el total de la suma
+    return total_sum
 
-# Imprimimos la solución
-print(f"La suma es {the_sum}")
 
-# Calcular el tiempo
-elapsed_time = round((timestap_02 - timestap_01) * 1e6, 2)
-print(f"Tiempo de ejecución: {elapsed_time} us")
+# Variable
+# El dataset
+dataset = []
 
+# Generando el contenido del Dataset
+repetition = 1
+
+while repetition <= 10:
+
+    # Tomando el tiempo inicial
+    timestamp_01 = time.time()
+
+    # Sumo los "n" numeros
+    n = repetition * 500
+    result = sum_of_n(n)
+
+    # Tomando el tiempo final
+    timestamp_02 = time.time()
+
+    # Calculando el tiempo
+    elapsed_time = round((timestamp_02 - timestamp_01) * 1e6, 2)
+
+    # Agregar la tripleta de los datos al Dataset
+    dataset.append((n, elapsed_time, result))
+
+    repetition = repetition + 1
+
+# Mostrar los resultados
+for tup in dataset:
+    print(tup)
