@@ -1,56 +1,101 @@
 from array import array as arr
 
-# Parametros de mi cuadricula
-rows = 10
-columns = 2 * rows - 1
+from enum import Enum
 
-# Funcio para imprimir la matrix
+# Borra pantalla con caracteres ANSI
+def clear_screen():
+    print("\033[2J\033[H", end="")
+
+# Enumerado para encapsular los colores
+class AnsiColor(Enum):
+    RED = "\033[91m"
+    YELLOW = "\033[93m"
+    CYAN = "\033[96m"
+    RESET = "\033[0m"
+
+
+# Funcion para imprimir la matriz
 def print_matrix(input_matrix):
     for row in input_matrix:
         print(list(row))
 
-# Creando la reticula 2D
-matrix = []
 
-# Construyendo el grid
-for _ in range(rows):
-    new_row = arr('i', [0] * columns)
-    matrix.append(new_row)
+# Funcion para generar el triangulo de Sierpinski
+def generate_triangle(rows=1):
 
-# Validando la cosntrucion del Grid
-print(f"Cantidad de filas: {len(matrix)}")
-print(f"Cantidad de columnas: {len(matrix[0])}")
+    # Parametros de la cuadricula
+    columns = 2 * rows - 1
 
-# Calculando el centro de la primera fila
-center = columns // 2  # Se hace division entera
+    # Crear la matriz 2D
+    matrix = []
 
-# Estableciendo el centro en 1
-matrix[0][center] = 1
+    # Construir la cuadricula
+    for _ in range(rows):
+        new_row = arr('i', [0] * columns)
+        matrix.append(new_row)
 
-print_matrix(matrix)
+    # Calcular el centro de la primera fila
+    center = columns // 2
 
-# Se calcula el resto de la matrix
-# Siguiendo la logica del siperpinsky Gasket
-for row in range(1, rows):
-    for col in range(columns):
-        left_upper_cell = 0
-        right_upper_cell = 0
+    # Establecer el centro en 1
+    matrix[0][center] = 1
 
-        # Si la columna donde estamos
-        # es mayor a 0
-        if col > 0:
-            left_upper_cell = matrix[row-1][col-1]
+    # Calcular el resto de la matriz
+    for row in range(1, rows):
+        for col in range(columns):
 
-        # Si la columna esta en el borde derecho
-        # del borde derecho
-        if col < columns - 1:
-            right_upper_cell = matrix[row-1][col+1]
+            left_upper_cell = 0
+            right_upper_cell = 0
 
-        # Guardar el arreglo
-        if left_upper_cell != right_upper_cell:
-            matrix[row][col] = 1
-        else:
-            matrix[row][col] = 0
+            # Celda superior izquierda
+            if col > 0:
+                left_upper_cell = matrix[row-1][col-1]
 
-print()
-print_matrix(matrix)
+            # Celda superior derecha
+            if col < columns - 1:
+                right_upper_cell = matrix[row-1][col+1]
+
+            # Aplicar la regla XOR
+            if left_upper_cell != right_upper_cell:
+                matrix[row][col] = 1
+            else:
+                matrix[row][col] = 0
+
+    # Regresar la matriz generada
+    return matrix
+
+
+# Funcion para dibujar la matriz
+def draw_matrix(input_matrix, symbol="*"):
+
+    for row in input_matrix:
+        for cell in row:
+
+            if cell == 1:
+                print(
+                    AnsiColor.CYAN.value + symbol +
+                    AnsiColor.RESET.value,
+                    end=""
+                )
+            else:
+                print(AnsiColor.RED.value + " ", end="")
+
+        print()
+
+
+# Metodo principal
+def main():
+
+    # Generar el triangulo de Sierpinski
+    matrix = generate_triangle(15)
+
+    # Limpiar pantalla
+    clear_screen()
+
+    # Dibujar el triangulo
+    draw_matrix(matrix, symbol="■")
+
+
+# Ejecutar el programa principal
+if __name__ == "__main__":
+    main()
